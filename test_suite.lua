@@ -1,4 +1,4 @@
-cls = require('mc')
+cls = require('iu')
 
 -- Construct a class
 A = cls.def('A')

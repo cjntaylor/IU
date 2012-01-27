@@ -4,14 +4,14 @@ m.def=function(n,r)local d={_id=0,_nm=n,_rt=(m.nul(r)and{m.obj}or{r})[1]};m.sm(d
 m.obj={
     init = function(...)end,call = function(...)end,new  = function(s,...)return{},arg;end,
     spr  = function(s,k,...)if m.nul(s._cl)then return;end;m.ti(arg,1,s);return s._su[k](m.upk(arg));end,
+    udc  = function(s,k,...)if m.nul(s._ud)then return;end;m.ti(arg,1,s._ud);return s._ud[k](m.upk(arg));end,
     str  = function(s) return '['..(m.non(s._cl)and{s._nm..' inst'}or{'class '..s._nm})[1]..(m.non(s._cl)and{' id: '..s._id}or{''})[1]..']';end,
     get  = function(s,k)local r=m.rg(s,k)
+        if m.nul(r) and m.non(m.rg(s,'_ud'))then r=m.rg(s,'_ud')[k]end
         if m.nul(r) and m.non(m.rg(s,'_cl'))then r=m.rg(s,'_cl')[k]end
         if m.nul(r) and m.non(m.rg(s,'_rt'))then r=m.rg(s,'_rt')[k]end;return r
     end,
-    set = function(s,k,v)
-        if m.non(m.rg(s,'_bs'))and m.non(m.rg(s,'_bs')[k])then m.rg(s,'_bs')[k]=v;else m.rs(s,k,v)end
-    end,
+    set = function(s,k,v)if m.non(m.rg(s,'_bs'))and m.non(m.rg(s,'_bs')[k])then m.rg(s,'_bs')[k]=v;else m.rs(s,k,v)end;end,
     add = function(s,o)end, sub = function(s,o)end, mul = function(s,o)end, 
     div = function(s,o)end,pow = function(s,o)end,
     _nm  = 'Object', _mt  = {
@@ -20,8 +20,8 @@ m.obj={
         __pow=function(l,r)return l:pow(r);end,
         __call = function(c,...)
             if m.non(c._cl) then return c:call(m.upk(arg)) end
-            local t,a=c:new(m.upk(arg));t._id=m.sf('0x%04x',c._id);c._id=c._id+1;
-            t._su={};m.sm(t._su,{__index=function(s,k)
+            local t,a=c:new(m.upk(arg));if not m.pc(function()t.f=nil;end)then local u=t;t={};t._ud=u;end
+            t._id=m.sf('0x%04x',c._id);c._id=c._id+1;t._su={};m.sm(t._su,{__index=function(s,k)
             if m.non(t._bs)and m.non(t._bs[k])then return t._bs[k];end;return c._rt[k]end})
             t._bs=m.gm(t);t._cl=c;m.sm(t,m.obj._mt);t:init(m.upk(a));return t
         end,
