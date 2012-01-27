@@ -7,7 +7,7 @@ Features
 --------
 * Classes can inherit from one other class
 * Classes can be constructed from base tables via the `new` operator
-* Superclass functions are available via `self:spr(<,…)`
+* Superclass functions are available via `self:spr(<name>,...)`
 * Sane defaults for unimplemented classes are provided
 * All object instances get a unique identifier available using `self._id` or `<inst>._id`
 * A meaningful "toString" method is provided, so print(<inst>) and print(<class>) actually do something useful
@@ -22,9 +22,9 @@ nested table structure:
         A = cls.def('A')    -- Class A
         B = cls.def('B', A) -- Class B, inherits A
 
-* `self:spr(<name>,…)`: Super method helper function. Accesses the superclass table with the given function name, and attempts to call it with the specified
+* `self:spr(<name>,...)`: Super method helper function. Accesses the superclass table with the given function name, and attempts to call it with the specified
 arguments.
-* `self:udc(<name>,…)`: Userdata helper function. Accesses methods on the embedded user data, passing a reference to the Userdata object instead of a reference to
+* `self:udc(<name>,...)`: Userdata helper function. Accesses methods on the embedded user data, passing a reference to the Userdata object instead of a reference to
 self. This is provided for libraries like [Love2d](http://www.love2d.org) (see below), which use functions
 that produce Userdata objects when called. The IU class model allows for
 IU classes to be based on Userdata objects by defining a `new` function on the
