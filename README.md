@@ -114,3 +114,7 @@ read and write. Right now, the functionality is there but it chains infinitely
 due to the way the code is structured. In the future, I might fix this; right now I think that its best to keep it simple.
 * Explore other means of handling Userdata objects. The `udc` method isn't bad, but its not as streamlined as I would have liked it to be. The problem is that
 lua doesn't have an easy way to manipulate the behavior of calling functions via the colon syntax. Self is always passed, where we actually need a reference to the Userdata object (at least in the case of Love2d).
+
+NAME
+----
+IU is named after the [Lojban](http://www.lojban.org) attitudinal (basically, a verbal version of this emoticon: <3) by the same name, meaning the emotion of \*love*. This library was originally written for the purpose of utilizing it with [Love2d](http://www.love2d.org), which is an awesome game framework :)
